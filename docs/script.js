@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Close mobile nav if open
-        mobileNav.classList.remove('active');
+        if (mobileNav) { // Add null check for mobileNav
+            mobileNav.classList.remove('active');
+        }
     };
 
     navLinks.forEach(link => {
@@ -35,53 +37,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Mobile menu toggle
-    menuToggle.addEventListener('click', () => {
-        mobileNav.classList.toggle('active');
-    });
+    if (menuToggle) { // Add null check for menuToggle
+        menuToggle.addEventListener('click', () => {
+            if (mobileNav) { // Add null check for mobileNav
+                mobileNav.classList.toggle('active');
+            }
+        });
+    }
 
     // --- Chart.js Initialization ---
     const ctx = document.getElementById('financial-chart');
     
-    // Placeholder data for the chart
-    const data = {
-        labels: ['Aug 1', 'Aug 7', 'Aug 14', 'Aug 21', 'Aug 28'],
-        datasets: [{
-            label: 'Revenue (Ksh)',
-            data: [65000, 59000, 80000, 81000, 56000],
-            borderColor: '#2ecc71',
-            backgroundColor: 'rgba(46, 204, 113, 0.2)',
-            fill: true,
-            tension: 0.4
-        }, {
-            label: 'Expenses (Ksh)',
-            data: [28000, 48000, 40000, 19000, 86000],
-            borderColor: '#e74c3c',
-            backgroundColor: 'rgba(231, 76, 60, 0.2)',
-            fill: true,
-            tension: 0.4
-        }]
-    };
+    // Only attempt to initialize Chart.js if the canvas element exists
+    if (ctx) {
+        // Placeholder data for the chart
+        const data = {
+            labels: ['Aug 1', 'Aug 7', 'Aug 14', 'Aug 21', 'Aug 28'],
+            datasets: [{
+                label: 'Revenue (Ksh)',
+                data: [65000, 59000, 80000, 81000, 56000],
+                borderColor: '#2ecc71',
+                backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                fill: true,
+                tension: 0.4
+            }, {
+                label: 'Expenses (Ksh)',
+                data: [28000, 48000, 40000, 19000, 86000],
+                borderColor: '#e74c3c',
+                backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                fill: true,
+                tension: 0.4
+            }]
+        };
 
-    new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
+        new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
+    } else {
+        console.error("Chart canvas element with ID 'financial-chart' not found!");
+    }
+
 
     // Handle M-Pesa transaction button click
     const addTransactionBtn = document.getElementById('add-transaction-btn');
-    addTransactionBtn.addEventListener('click', () => {
-        alert("Redirecting to M-Pesa Transaction Input Form...");
-        // This is still a placeholder. We'll build the actual form next.
-    });
+    if (addTransactionBtn) { // Add null check for the button
+        addTransactionBtn.addEventListener('click', () => {
+            alert("Redirecting to M-Pesa Transaction Input Form...");
+            // This is still a placeholder. We'll build the actual form next.
+        });
+    }
 
     // --- Image Slider Logic ---
     const sliderWrapper = document.querySelector('.slider-wrapper');
@@ -90,58 +104,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.querySelector('.slider-btn.next');
     const dotsContainer = document.querySelector('.slider-dots');
 
-    let currentSlide = 0;
-    const totalSlides = slides.length;
+    // Only proceed with slider logic if essential elements exist
+    if (sliderWrapper && slides.length > 0 && prevBtn && nextBtn && dotsContainer) {
+        let currentSlide = 0;
+        const totalSlides = slides.length;
 
-    // Create dots for each slide
-    for (let i = 0; i < totalSlides; i++) {
-        const dot = document.createElement('span');
-        dot.classList.add('dot');
-        dot.dataset.slide = i;
-        dotsContainer.appendChild(dot);
-    }
-
-    const dots = document.querySelectorAll('.dot');
-
-    const showSlide = (index) => {
-        // Ensure index wraps around
-        if (index >= totalSlides) {
-            currentSlide = 0;
-        } else if (index < 0) {
-            currentSlide = totalSlides - 1;
-        } else {
-            currentSlide = index;
+        // Create dots for each slide
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.dataset.slide = i;
+            dotsContainer.appendChild(dot);
         }
 
-        const offset = -currentSlide * 100;
-        sliderWrapper.style.transform = `translateX(${offset}%)`;
+        const dots = document.querySelectorAll('.dot'); // Re-query dots after creation
 
-        // Update active dot
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[currentSlide].classList.add('active');
-    };
+        const showSlide = (index) => {
+            // Ensure index wraps around
+            if (index >= totalSlides) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = index;
+            }
 
-    // Event listeners for slider buttons
-    prevBtn.addEventListener('click', () => {
-        showSlide(currentSlide - 1);
-    });
+            const offset = -currentSlide * 100;
+            sliderWrapper.style.transform = `translateX(${offset}%)`;
 
-    nextBtn.addEventListener('click', () => {
-        showSlide(currentSlide + 1);
-    });
+            // Update active dot
+            if (dots.length > 0) { // Check if dots exist before trying to update
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentSlide].classList.add('active');
+            }
+        };
 
-    // Event listeners for dots
-    dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-            showSlide(parseInt(e.target.dataset.slide));
+        // Event listeners for slider buttons
+        prevBtn.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
         });
-    });
 
-    // Auto-play feature
-    setInterval(() => {
-        showSlide(currentSlide + 1);
-    }, 5000); // Change slide every 5 seconds
+        nextBtn.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
 
-    // Initial slide display
-    showSlide(0);
+        // Event listeners for dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                showSlide(parseInt(e.target.dataset.slide));
+            });
+        });
+
+        // Auto-play feature
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000); // Change slide every 5 seconds
+
+        // Initial slide display
+        showSlide(0);
+    } else {
+        console.warn("Slider components not found or not enough slides to initialize slider.");
+    }
 });
