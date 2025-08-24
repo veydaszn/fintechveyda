@@ -1,4 +1,5 @@
 Project Overview
+
 FinTechVeyda is a user-friendly, integrated web application designed to streamline financial operations for Small and Medium-sized Enterprises (SMEs) in Kenya. This project addresses the critical challenges Kenyan SMEs face in managing cash flow, invoicing, payroll, and expense tracking, which often hinder their growth and access to working capital.
 
 Our solution aims to provide an accessible and intuitive platform tailored to the local market, with a strong focus on M-Pesa integration, recognizing its pervasive role in Kenya's financial landscape. This initiative aligns with the conference theme of "Innovative Pathways to Inclusive Education: Advancing Knowledge, Technology, and Sustainable Development" by fostering financial literacy and operational efficiency within the SME sector.
