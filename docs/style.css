@@ -1,0 +1,463 @@
+/* Universal box-sizing for easier layout management */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+.app-header {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 5px;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    background-color: #34495e;
+    padding: 1rem;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav.active {
+    display: flex;
+}
+
+.mobile-nav .nav-link {
+    margin: 0.5rem 0;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav .nav-link:last-child {
+    border-bottom: none;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: #ecf0f1;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none; /* Hidden by default, shown on mobile */
+}
+
+
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.metrics-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.metric-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-card h3 {
+    margin-top: 0;
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+.metric-card p {
+    font-size: 2.2rem; /* Slightly larger for impact */
+    font-weight: bold;
+    margin: 0.5rem 0 0;
+    color: #2c3e50;
+}
+
+.chart-panel, .action-panel {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.chart-panel h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-button {
+    background-color: #2ecc71;
+    color: #ffffff;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px; /* Slightly more rounded */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.cta-button:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+canvas {
+    max-width: 100%;
+    height: 300px; /* Fixed height for consistency */
+}
+
+/* Slider Specific Styles */
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%; /* Ensure it spans full width */
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Rounded corners for the slider */
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-align: center;
+    flex-shrink: 0; /* Prevent slides from shrinking */
+}
+
+.slide img {
+    width: 100%;
+    height: 400px; /* Fixed height for slider images */
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    filter: brightness(60%); /* Darken image for text readability */
+}
+
+.slide-content {
+    position: absolute;
+    padding: 2rem;
+    max-width: 80%;
+    z-index: 1; /* Ensure text is above image */
+}
+
+.slide-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ecf0f1;
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    color: #bdc3c7;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border: none;
+    padding: 1rem 0.8rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 2;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.slider-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.slider-btn.prev {
+    left: 1rem;
+}
+
+.slider-btn.next {
+    right: 1rem;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.dot.active {
+    background-color: #3498db;
+    transform: scale(1.2);
+}
+
+/* Footer Specific Styles */
+.app-footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 3rem 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2rem;
+    border-top: 5px solid #3498db; /* Accent color */
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px; /* Minimum width for columns before wrapping */
+}
+
+.footer-section h3, .footer-section h4 {
+    color: #3498db;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-section p, .footer-section ul {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #bdc3c7;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    padding: 0.25rem 0;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #3498db;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    color: #ecf0f1;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #3498db;
+}
+
+.footer-bottom {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #7f8c8d;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .app-header h1 {
+        font-size: 1.6rem;
+    }
+    .app-header nav .nav-link {
+        margin-left: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+    .slide img {
+        height: 350px;
+    }
+    .slide-content h2 {
+        font-size: 2rem;
+    }
+    .slide-content p {
+        font-size: 1.1rem;
+    }
+    .footer-section {
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-header {
+        padding: 1rem 1.5rem;
+    }
+    .main-nav .nav-link {
+        display: none; /* Hide desktop nav links */
+    }
+    .menu-toggle {
+        display: block; /* Show hamburger menu */
+    }
+    .container {
+        padding: 1.5rem;
+    }
+    .metrics-panel {
+        grid-template-columns: 1fr; /* Stack metric cards on smaller screens */
+        gap: 1rem;
+    }
+    .metric-card p {
+        font-size: 1.8rem;
+    }
+    .slide img {
+        height: 300px;
+    }
+    .slide-content h2 {
+        font-size: 1.8rem;
+    }
+    .slide-content p {
+        font-size: 1rem;
+    }
+    .slider-btn {
+        padding: 0.8rem 0.6rem;
+        font-size: 1.2rem;
+    }
+    .slider-dots {
+        bottom: 0.5rem;
+    }
+    .app-footer {
+        flex-direction: column; /* Stack footer sections vertically */
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1rem 0.5rem;
+    }
+    .footer-section {
+        min-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+    .footer-section:last-of-type {
+        margin-bottom: 0;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-header h1 {
+        font-size: 1.4rem;
+    }
+    .container {
+        padding: 1rem;
+    }
+    .metric-card {
+        padding: 1rem;
+    }
+    .metric-card h3 {
+        font-size: 0.9rem;
+    }
+    .metric-card p {
+        font-size: 1.5rem;
+    }
+    .slide img {
+        height: 250px;
+    }
+    .slide-content h2 {
+        font-size: 1.5rem;
+    }
+    .slide-content p {
+        font-size: 0.9rem;
+    }
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    .app-footer {
+        padding: 1.5rem 0.5rem 0.5rem;
+    }
+    .footer-section h3, .footer-section h4 {
+        font-size: 1.1rem;
+    }
+    .footer-section p, .footer-section ul {
+        font-size: 0.85rem;
+    }
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTechVeyda | SME Financial Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons in footer and possibly slider controls -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="app-header">
+        <h1>FinTechVeyda</h1>
+        <nav class="main-nav">
+            <a href="#" class="nav-link active" data-page="dashboard">Dashboard</a>
+            <a href="#" class="nav-link" data-page="transactions">Transactions</a>
+            <a href="#" class="nav-link" data-page="reports">Reports</a>
+            <button class="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Responsive Navigation Menu for Mobile -->
+    <nav class="mobile-nav">
+        <a href="#" class="nav-link" data-page="dashboard">Dashboard</a>
+        <a href="#" class="nav-link" data-page="transactions">Transactions</a>
+        <a href="#" class="nav-link" data-page="reports">Reports</a>
+    </nav>
+
+    <!-- Slider Section -->
+    <section class="slider-container">
+        <div class="slider-wrapper">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/2c3e50/ecf0f1?text=Streamline+Finances" alt="Streamline Finances">
+                <div class="slide-content">
+                    <h2>Streamline Your Financial Operations</h2>
+                    <p>Automate invoicing, expense tracking, and payroll effortlessly.</p>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/34495e/ecf0f1?text=M-Pesa+Integration" alt="M-Pesa Integration">
+                <div class="slide-content">
+                    <h2>Seamless M-Pesa Integration</h2>
+                    <p>Track all your M-Pesa business transactions with ease.</p>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/1abc9c/ecf0f1?text=Actionable+Insights" alt="Actionable Insights">
+                <div class="slide-content">
+                    <h2>Gain Actionable Financial Insights</h2>
+                    <p>Comprehensive dashboards for key financial metrics and smart decisions.</p>
+                </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/2ecc71/ecf0f1?text=Boost+Cash+Flow" alt="Boost Cash Flow">
+                <div class="slide-content">
+                    <h2>Boost Your Cash Flow Management</h2>
+                    <p>Stay on top of your liquidity with real-time tracking.</p>
+                </div>
+            </div>
+            <!-- Slide 5 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/3498db/ecf0f1?text=KRA+Compliance" alt="KRA Compliance">
+                <div class="slide-content">
+                    <h2>Simplify KRA Compliance</h2>
+                    <p>Generate essential reports to meet local regulatory requirements.</p>
+                </div>
+            </div>
+            <!-- Slide 6 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/9b59b6/ecf0f1?text=Scalable+Solution" alt="Scalable Solution">
+                <div class="slide-content">
+                    <h2>A Scalable Solution for Growing SMEs</h2>
+                    <p>Designed to grow with your business, from startup to established enterprise.</p>
+                </div>
+            </div>
+            <!-- Slide 7 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/e67e22/ecf0f1?text=Secure+Data" alt="Secure Data">
+                <div class="slide-content">
+                    <h2>Secure and Reliable Financial Data Management</h2>
+                    <p>Your business data is protected with modern web technologies.</p>
+                </div>
+            </div>
+            <!-- Slide 8 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/e74c3c/ecf0f1?text=User-Friendly+Design" alt="User-Friendly Design">
+                <div class="slide-content">
+                    <h2>User-Friendly Interface for All</h2>
+                    <p>Intuitive design for tech-savvy and non-tech-savvy users alike.</p>
+                </div>
+            </div>
+            <!-- Slide 9 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/f1c40f/2c3e50?text=Customer+Management" alt="Customer Management">
+                <div class="slide-content">
+                    <h2>Efficient Customer & Supplier Management</h2>
+                    <p>Keep track of all your business relationships in one place.</p>
+                </div>
+            </div>
+            <!-- Slide 10 -->
+            <div class="slide">
+                <img src="https://placehold.co/1200x400/34495e/ecf0f1?text=Empower+Your+Business" alt="Empower Your Business">
+                <div class="slide-content">
+                    <h2>Empower Your Business Growth</h2>
+                    <p>Leverage technology for improved decision-making and sustainable growth.</p>
+                </div>
+            </div>
+        </div>
+        <button class="slider-btn prev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+        <div class="slider-dots"></div>
+    </section>
+
+    <main class="container">
+        <!-- The Main Dashboard Page -->
+        <div id="dashboard-page" class="page active">
+            <section class="metrics-panel">
+                <div class="metric-card">
+                    <h3>Total Revenue</h3>
+                    <p id="total-revenue">KSh 0.00</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Total Expenses</h3>
+                    <p id="total-expenses">KSh 0.00</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Net Cash Flow</h3>
+                    <p id="net-cash-flow">KSh 0.00</p>
+                </div>
+            </section>
+
+            <section class="chart-panel">
+                <h2>Financial Trends (Last 30 Days)</h2>
+                <canvas id="financial-chart"></canvas>
+            </section>
+
+            <section class="action-panel">
+                <button id="add-transaction-btn" class="cta-button">Record M-Pesa Transaction</button>
+            </section>
+        </div>
+
+        <!-- Placeholder for Other Pages -->
+        <div id="transactions-page" class="page">
+            <h2>Transaction History</h2>
+            <p>Content for the transaction history page will go here.</p>
+        </div>
+
+        <div id="reports-page" class="page">
+            <h2>Financial Reports</h2>
+            <p>Content for the reports page will go here.</p>
+        </div>
+    </main>
+    
+    <footer class="app-footer">
+        <div class="footer-section brand-info">
+            <h3>FinTechVeyda</h3>
+            <p>Your integrated digital solution for enhancing SME financial resilience in Kenya.</p>
+        </div>
+        <div class="footer-section quick-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#" data-page="dashboard">Dashboard</a></li>
+                <li><a href="#" data-page="transactions">Transactions</a></li>
+                <li><a href="#" data-page="reports">Reports</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact-info">
+            <h4>Contact Us</h4>
+            <p><i class="fas fa-envelope"></i> info@fintechveyda.com</p>
+            <p><i class="fas fa-phone"></i> +254 7XX XXX XXX</p>
+            <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+        </div>
+        <div class="footer-section social-media">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FinTechVeyda. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
