@@ -62,17 +62,6 @@ body {
     display: flex;
 }
 
-.mobile-nav .nav-link {
-    margin: 0.5rem 0;
-    text-align: center;
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-nav .nav-link:last-child {
-    border-bottom: none;
-}
-
 .menu-toggle {
     background: none;
     border: none;
@@ -135,6 +124,15 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    /* --- NEW/MODIFIED STYLES FOR CHART PANEL --- */
+    position: relative; /* Establish positioning context for absolute children if any */
+    height: 400px; /* Give the panel a fixed height */
+    overflow: hidden; /* Hide anything that might overflow */
+    display: flex; /* Use flexbox to help center content vertically */
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    /* --- END NEW/MODIFIED STYLES --- */
 }
 
 .chart-panel h2 {
@@ -166,7 +164,9 @@ body {
 
 canvas {
     max-width: 100%;
-    height: 300px; /* Fixed height for consistency */
+    /* Original height was 300px, let's allow it to take full height of its container now */
+    height: 100%; /* Allows canvas to take full height of its flex parent .chart-panel */
+    display: block; /* Ensure canvas behaves as a block element */
 }
 
 /* Slider Specific Styles */
